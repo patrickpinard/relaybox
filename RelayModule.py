@@ -1,9 +1,10 @@
 # Auteur : Patrick Pinard 
-# Objet : gestion carte relay 4 ports sur Raspeberry Pi Zero
+# Objet : gestion de 4 relais 240V sur Raspeberry Pi Zero
 # Version : 1
 # -*- coding: utf-8 -*-
 
 #   Clavier MAC :      
+
 #  {} = "alt/option" + "(" ou ")"
 #  [] = "alt/option" + "5" ou "6"
 #   ~  = "alt/option" + n    
@@ -14,9 +15,9 @@ import RPi.GPIO as GPIO
 import time
 
 # fichier log
-logging.basicConfig(filename='Relay.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='RelayModule.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-DEBUG = True    # si True alors Logging
+DEBUG = True    # si True alors Logging de tous les events
 
 pinRelay1 = 17  #pin11  fil jaune
 pinRelay2 = 27  #pin13  fil orange
