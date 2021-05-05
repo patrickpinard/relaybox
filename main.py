@@ -74,11 +74,14 @@ def login():
                 logging.warning("login with wrong username and password")
                 return render_template('login.html', error_message="wrong username and password. Please try again")
 
-@app.route("/logout", methods=['POST'])
+@app.route("/logout", methods=["GET",'POST'])
 def logout():
-    session["logged_in"] = False
-    logging.info("user logout")
-    return render_template('login.html')       
+    if request.method == 'POST':
+        session["logged_in"] = False
+        logging.info("user logout")
+        return render_template('login.html')    
+    else : 
+        return render_template('login.html')       
 
 @app.route("/command/<changePin>/<action>")
 def command(changePin, action):
