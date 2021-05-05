@@ -78,7 +78,7 @@ def login():
 def logout():
     session["logged_in"] = False
     logging.info("user logout")
-    return render_template("login.html")        
+    return redirect(url_for('login'))        
 
 @app.route("/command/<changePin>/<action>")
 def command(changePin, action):
