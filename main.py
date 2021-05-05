@@ -33,7 +33,7 @@ pins = {
     27: {'name': '  Phone Charger', 'state': GPIO.LOW, 'status': "OFF"},
     22: {'name': '  Speakers     ', 'state': GPIO.LOW, 'status': "OFF"},
 }
-logging.info("pins definition done :  " + str(pins))
+logging.info("pins definition : /n " + str(pins))
 
 # Set each pin as an output and make it low:
 for pin in pins:
