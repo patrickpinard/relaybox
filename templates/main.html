@@ -20,12 +20,8 @@
     <div class="container">
         <a class="navbar-brand" href="#"> Relay Control Web App </a>
         <form method="POST" action="logout" class="center-block" href="{{ url_for('logout') }}"></form>
-          <button type="button" class="btn btn-secondary" type="submit" value="logout">LOGOUT</button>
-          {% if current_user.is_authenticated %}
-          <button type="button" class="btn btn-secondary" type="submit" value="logout">LOGOUT</button>
-          {% else %}
-          <button type="button" class="btn btn-secondary" type="submit" value="login">LOGIN</button>
-          {% endif %}
+          <input  type="button" class="btn btn-secondary" type="submit" value="logout">LOGOUT</input>
+          <a type="button" class="btn btn-danger" type="submit" href="/logout" >Turn Off</a>
         </form>   
 </nav>
 <!-- MAIN CONTENT -->
