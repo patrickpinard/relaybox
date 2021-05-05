@@ -9,11 +9,8 @@ Le boitier est construit en séparant la partie électrique 240V de la commande 
 ![](images/MonsterBorgV1.png)
 
 
-
 # Code
-Le code est très simple. Il utilise une class pour l'objet Relay....
-
-(en construction)
+Le code est reprit de https://github.com/yusufcanb/flask-relay-control et adapté avec Bootstrap.
 
 ![](images/relaymodule.jpg)
 
