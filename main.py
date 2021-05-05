@@ -33,6 +33,7 @@ pins = {
     27: {'name': '  Phone Charger', 'state': GPIO.LOW, 'status': "OFF"},
     22: {'name': '  Speakers     ', 'state': GPIO.LOW, 'status': "OFF"},
 }
+logging.info("pins definition done :  " + pins)
 
 # Set each pin as an output and make it low:
 for pin in pins:
@@ -76,12 +77,10 @@ def login():
 
 @app.route("/logout", methods=["GET",'POST'])
 def logout():
-    if request.method == 'POST':
-        session["logged_in"] = False
-        logging.info("user logout")
-        return render_template('login.html')    
-    else : 
-        return render_template('login.html')       
+    
+    session["logged_in"] = False
+    logging.info("user logout")
+    return render_template('login.html')           
 
 @app.route("/command/<changePin>/<action>")
 def command(changePin, action):
@@ -122,4 +121,5 @@ def command(changePin, action):
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
+    logging.info("program starting...")
     app.run(host='0.0.0.0', port=8000, debug=True)
