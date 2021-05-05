@@ -12,8 +12,13 @@
 #   \  = Alt + Maj + / 
 
 import RPi.GPIO as GPIO
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, jsonify, url_for, session, abort
+import logging
 
+PASSWORD    = 'password'
+USERNAME    = "admin"
+
+logging.basicConfig(filename='main.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
 
@@ -32,6 +37,42 @@ for pin in pins:
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, GPIO.LOW)
 
+@app.route('/login', methods=["GET", "POST"])
+def home():
+    
+    if request.method == "GET":
+        # Check if user already logged in
+        
+        if not session.get("logged_in"):
+            logging.info("login not done, redirect to 'login' page")
+            return render_template('login.html', error_message=" welcome ! ")
+        else:
+            logging.info("login already done, redirect to 'index' page")
+            return "already logged"
+
+    if request.method == "POST":
+        # Try to login user
+        
+        name = request.form.get("username")
+        pwd = request.form.get("password")
+
+        if pwd == PASSWORD and name == USERNAME:
+                logging.info("user: " + name + " logged in")
+                session['logged_in'] = True
+                return render_template('main.html')
+        else:
+                logging.warning("login with wrong username and password")
+                return render_template('login.html', error_message="wrong username and password. Please try again")
+
+@app.route("/logout", methods=['POST'])
+def logout():
+    global name
+    # stop the Monsterborg if logout
+    # Borg.running = False
+    logging.info("Monsterborg stopped when logout")
+    session["logged_in"] = False
+    logging.info("user " + name + " logout")
+    return render_template("login.html")        
 
 @app.route("/")
 def main():
@@ -50,6 +91,7 @@ def main():
 
 @app.route("/<changePin>/<action>")
 def action(changePin, action):
+    message =""
     # Convert the pin from the URL into an integer:
     changePin = int(changePin)
     # Get the device name for the pin being changed:
