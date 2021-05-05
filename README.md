@@ -3,6 +3,16 @@ Boitier avec 3 prises 240V commandées via une interface Web en utilisant les te
 
 Ce projet consiste à regrouper différentes technologies pour piloter un boitier électrique grâce à une application web simple via le wifi de la maison.
 
+# Interface
+
+Depuis un smartphone :
+
+![](images/RelayControlApp.png)
+
+Depuis un PC :
+
+![](images/RelayControlAppPC.png)
+
 # Boitier
 Le boitier est construit en séparant la partie électrique 240V de la commande (Raspberry Pi zero et module relais) au maximum.
 
