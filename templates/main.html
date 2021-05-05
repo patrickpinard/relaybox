@@ -14,7 +14,7 @@
   <script>
     function relocate_home()
     {
-         location.href = "zero.ppdlab.ch:8000";
+         location.href = "zero.ppdlab.ch:8000/";
     } 
     </script>
 </head>
@@ -25,8 +25,7 @@
     <div class="container">
         <a class="navbar-brand" href="#"> Relay Control Web App </a>
         <form method="POST" action="logout" class="center-block">
-          <button name="LOGOUT" type="submit" class="btn btn-secondary" onclick="relocate_home()" value="logout"> LOGOUT </button>
-          <input type="button" class="btn btn-info" value="Input Button" onclick="relocate_home()">
+          <button name="LOGOUT" type="submit" class="btn btn-secondary" href="http://zero.ppdlab.ch:8000" onclick="relocate_home()" value="logout"> LOGOUT </button>
         </form>   
 </nav>
 <!-- MAIN CONTENT -->
