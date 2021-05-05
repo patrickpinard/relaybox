@@ -20,8 +20,8 @@
     <div class="container">
         <a class="navbar-brand" href="#"> Relay Control Web App </a>
         <form method="POST" action="logout" class="center-block">
-          <button name="LOGOUT" type="submit" class="btn btn-secondary btn-secondary" value="LOGOUT"> LOGOUT </button>
-        </form> 
+          <a name="LOGOUT" class="btn btn-secondary btn-secondary" href="{{ url_for('logout') }}" value="logout"> LOGOUT </a>
+        </form>   
 </nav>
 <!-- MAIN CONTENT -->
   <div class="container" style="margin-top: 50px;">
@@ -45,11 +45,13 @@
               <td>{{ pins[pin].name }}</td>
               <td class="{% if pins[pin].state == true %} active {%else%} not-active {% endif %}"><strong> {{ pins[pin].status | string }} </strong></td>
               <td>
+                <form method="POST" action="command" class="center-block"></form>
                 {% if pins[pin].state == true %}
                 <!-- <a class="button" href="/{{pin}}/off"> Turn Off</a> -->
-                <a type="button" class="btn btn-danger" href="/{{pin}}/off">Turn Off</a> {% else %}
-                <a type="button" class="btn btn-success" href="/{{pin}}/on">Turn On</a> 
+                <a type="button" class="btn btn-danger" type="submit" href="/command/{{pin}}/off" >Turn Off</a> {% else %}
+                <a type="button" class="btn btn-success" type="submit" href="/command/{{pin}}/on" >Turn On</a> 
                 <!-- <a class="button" href="/{{pin}}/on">Turn On</a> --> {% endif %}
+              </form> 
               </td>
               {% endfor %}
             </tr>

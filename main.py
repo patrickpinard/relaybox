@@ -14,9 +14,11 @@
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, request, redirect, jsonify, url_for, session, abort
 import logging
+import os
 
 PASSWORD    = 'password'
 USERNAME    = "admin"
+name = ""
 
 logging.basicConfig(filename='main.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -27,9 +29,9 @@ GPIO.setwarnings(False)
 
 # Create a dictionary called pins to store the pin number, name, and pin state:
 pins = {
-    17: {'name': 'Desk Lamp', 'state': GPIO.LOW, 'status': "OFF"},
-    27: {'name': 'Phone Charger', 'state': GPIO.LOW, 'status': "OFF"},
-    22: {'name': 'Speakers', 'state': GPIO.LOW,  'status': "OFF"},
+    17: {'name': '  Desk Lamp    ', 'state': GPIO.LOW, 'status': "OFF"},
+    27: {'name': '  Phone Charger', 'state': GPIO.LOW, 'status': "OFF"},
+    22: {'name': '  Speakers     ', 'state': GPIO.LOW, 'status': "OFF"},
 }
 
 # Set each pin as an output and make it low:
@@ -37,8 +39,8 @@ for pin in pins:
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, GPIO.LOW)
 
-@app.route('/login', methods=["GET", "POST"])
-def home():
+@app.route('/', methods=["GET", "POST"])
+def login():
     
     if request.method == "GET":
         # Check if user already logged in
@@ -47,8 +49,8 @@ def home():
             logging.info("login not done, redirect to 'login' page")
             return render_template('login.html', error_message=" welcome ! ")
         else:
-            logging.info("login already done, redirect to 'index' page")
-            return "already logged"
+            logging.info("login already done, redirect to 'main' page")
+            return render_template('main.html')
 
     if request.method == "POST":
         # Try to login user
@@ -59,38 +61,27 @@ def home():
         if pwd == PASSWORD and name == USERNAME:
                 logging.info("user: " + name + " logged in")
                 session['logged_in'] = True
-                return render_template('main.html')
+                # For each pin, read the pin state and store it in the pins dictionary:
+                for pin in pins:
+                    pins[pin]['state'] = GPIO.input(pin)
+                # Put the pin dictionary into the template data dictionary:
+                templateData = {
+                    'pins': pins
+                }
+                # Pass the template data into the template main.html and return it to the user
+                return render_template('main.html', **templateData)
         else:
                 logging.warning("login with wrong username and password")
                 return render_template('login.html', error_message="wrong username and password. Please try again")
 
 @app.route("/logout", methods=['POST'])
 def logout():
-    global name
-    # stop the Monsterborg if logout
-    # Borg.running = False
-    logging.info("Monsterborg stopped when logout")
     session["logged_in"] = False
-    logging.info("user " + name + " logout")
+    logging.info("user logout")
     return render_template("login.html")        
 
-@app.route("/")
-def main():
-    # For each pin, read the pin state and store it in the pins dictionary:
-    for pin in pins:
-        pins[pin]['state'] = GPIO.input(pin)
-    # Put the pin dictionary into the template data dictionary:
-    templateData = {
-        'pins': pins
-    }
-    # Pass the template data into the template main.html and return it to the user
-    return render_template('main.html', **templateData)
-
-# The function below is executed when someone requests a URL with the pin number and action in it:
-
-
-@app.route("/<changePin>/<action>")
-def action(changePin, action):
+@app.route("/command/<changePin>/<action>")
+def command(changePin, action):
     message =""
     # Convert the pin from the URL into an integer:
     changePin = int(changePin)
@@ -127,4 +118,5 @@ def action(changePin, action):
 
 
 if __name__ == "__main__":
+    app.secret_key = os.urandom(12)
     app.run(host='0.0.0.0', port=8000, debug=True)
