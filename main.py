@@ -16,8 +16,8 @@ from flask import Flask, render_template, request, redirect, jsonify, url_for, s
 import logging
 import os
 
-PASSWORD    = 'password'
-USERNAME    = "admin"
+PASSWORD    = ''
+USERNAME    = ''
 name = ""
 
 logging.basicConfig(filename='main.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
