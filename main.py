@@ -15,7 +15,8 @@ from gpiozero import Button
 import time                         
 import os                           
 
-stopButton = Button(26)             # external button to shutdown if pressed continously 2 sec
+stopButton = 26
+GPIO.setup(stopButton, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # external button to shutdown if pressed continously 2 sec        
 
 PASSWORD    = 'password'
 USERNAME    = 'admin'
@@ -122,20 +123,14 @@ def command(changePin, action):
 def shutdown(channel):
     # shutdown proprely raspberry pi zero if external button pressed 2 sec. continously
     
-    global stopButton
-
     logging.info("stop button pressed... waiting for confirmation to shutdown.")
-    if stopButton.is_pressed: #Check to see if button is pressed
-        time.sleep(1) # wait for the hold time we want. 
-        if stopButton.is_pressed: #check if the user let go of the button
-            logging.info("shutdown raspberry pi confirmed by stop button pressed more than 2 sec.")
-            os.system("shutdown now -h") #shut down the Pi -h is or -r will reset
-            time.sleep(1) # wait to loop again so we don’t use the processor too much.
+    os.system("shutdown now -h") #shut down the Pi -h is or -r will reset
+    
         
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
     logging.info("program starting...")
     logging.info("pins definition : " + str(pins))
-    GPIO.add_event_detect(26, GPIO.RISING, callback=shutdown)  # waiting event to shutdown via external stop button 
+    GPIO.add_event_detect(stopButton, GPIO.FALLING, callback=shutdown, bouncetime=2000)  # waiting event to shutdown via external stop button pressed 2 sec.
     app.run(host='0.0.0.0', port=8000, debug=True)
