@@ -3,6 +3,14 @@ Boitier avec 3 prises 240V commandées via une interface Web en utilisant les te
 
 Ce projet consiste à regrouper différentes technologies pour piloter un boitier électrique grâce à une application web simple via le wifi de la maison.
 
+PinOut
+
+Relays	  BOARD	  BCM
+Relay 1	  11	    GPIO 17
+Relay 2	  15	    GPIO 22
+Relay 3	  13	    GPIO 27
+Relay 4	  16	    GPIO 23
+
 # Interface
 
 Depuis un smartphone :
