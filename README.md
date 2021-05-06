@@ -1,4 +1,6 @@
-# Module Relais 240V
+### Relay Box
+
+# Module 4x relais 240V
 Boitier avec 4 prises 240V commandées via une interface Web en utilisant les technologies Restful API, Flask, bootstrap sur une Raspberry Pi zero.
 
 Ce projet consiste à regrouper différentes technologies pour piloter un boitier électrique grâce à une application web simple via le wifi de la maison.
