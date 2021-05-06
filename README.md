@@ -32,7 +32,7 @@ Le boitier est construit en séparant la partie électrique 240V de la commande 
 
 
 # Code
-Le code est reprit de https://github.com/yusufcanb/flask-relay-control et adapté avec Bootstrap.
+Le code est simple et utilise GPIO, Flask, Bootstrap et Logging.
 
 ![](images/relaymodule.jpg)
 
