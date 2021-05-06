@@ -10,8 +10,6 @@
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, request, redirect, jsonify, url_for, session, abort
 import logging
-import time
-from gpiozero import Button         
 import time                         
 import os                           
 
