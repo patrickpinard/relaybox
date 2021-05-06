@@ -2,29 +2,25 @@
 #!/usr/bin/env python
 # coding: utf-8
 # Auteur    : Patrick Pinard
-# Date      : 5.5.2021
+# Date      : 6.5.2021
 # Objet     : Pilotage modules relais avec interface web basée sur API RESTful Flask et bootstrap sur PI zero 
-# Version   : 1.0
-# 
-#  {} = "alt/option" + "(" ou ")"
-#  [] = "alt/option" + "5" ou "6"
-#   ~  = "alt/option" + n    
-#   \  = Alt + Maj + / 
-
+# Version   :   1.1 - ajout du bouton shutdown externe
+#               1.0 - version initiale fonctionelle
+ 
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, request, redirect, jsonify, url_for, session, abort
 import logging
 import time
-from gpiozero import Button         #import button from the Pi GPIO library
-import time                         # import time functions
-import os                           #imports OS library for Shutdown control
+from gpiozero import Button         
+import time                         
+import os                           
 
-stopButton = Button(26)             # defines the button as an object and chooses GPIO 26
+stopButton = Button(26)             # external button to shutdown if pressed continously 2 sec
 
-PASSWORD    = ''
-USERNAME    = ''
-name = ""
-SHUTDOWN_BUTTON = 10
+PASSWORD    = 'password'
+USERNAME    = 'admin'
+
+
 
 logging.basicConfig(filename='main.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -36,10 +32,9 @@ GPIO.setwarnings(False)
 # Create a dictionary called pins to store the pin number, name, and pin state:
 pins = {
     17: {'name': '  Desk Lamp    ', 'state': GPIO.LOW, 'status': "OFF"},
-    27: {'name': '  Phone Charger', 'state': GPIO.LOW, 'status': "OFF"},
-    22: {'name': '  Speakers     ', 'state': GPIO.LOW, 'status': "OFF"},
+    27: {'name': '  Charger      ', 'state': GPIO.LOW, 'status': "OFF"},
+    22: {'name': '  Heating      ', 'state': GPIO.LOW, 'status': "OFF"},
 }
-logging.info("pins definition : /n " + str(pins))
 
 # Set each pin as an output and make it low:
 for pin in pins:
@@ -125,7 +120,7 @@ def command(changePin, action):
     return render_template('main.html', **templateData)
 
 def shutdown(channel):
-    # shutdown proprely raspberry pi zero if external button pressed
+    # shutdown proprely raspberry pi zero if external button pressed 2 sec. continously
     
     global stopButton
 
@@ -141,5 +136,6 @@ def shutdown(channel):
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
     logging.info("program starting...")
+    logging.info("pins definition : " + str(pins))
     GPIO.add_event_detect(stopButton, GPIO.RISING, callback=shutdown)  # waiting event to shutdown via external stop button 
     app.run(host='0.0.0.0', port=8000, debug=True)
