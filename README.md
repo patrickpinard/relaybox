@@ -6,9 +6,13 @@ Ce projet consiste à regrouper différentes technologies pour piloter un boitie
 PinOut
 
 Relays	  BOARD	  BCM
+
 Relay 1	  11	    GPIO 17
+
 Relay 2	  15	    GPIO 22
+
 Relay 3	  13	    GPIO 27
+
 Relay 4	  16	    GPIO 23
 
 # Interface
