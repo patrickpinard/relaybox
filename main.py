@@ -137,5 +137,5 @@ if __name__ == "__main__":
     app.secret_key = os.urandom(12)
     logging.info("program starting...")
     logging.info("pins definition : " + str(pins))
-    GPIO.add_event_detect(stopButton, GPIO.RISING, callback=shutdown)  # waiting event to shutdown via external stop button 
+    GPIO.add_event_detect(26, GPIO.RISING, callback=shutdown)  # waiting event to shutdown via external stop button 
     app.run(host='0.0.0.0', port=8000, debug=True)
