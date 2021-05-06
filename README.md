@@ -3,17 +3,17 @@ Boitier avec 4 prises 240V commandées via une interface Web en utilisant les te
 
 Ce projet consiste à regrouper différentes technologies pour piloter un boitier électrique grâce à une application web simple via le wifi de la maison.
 
-PinOut
 
-Relays	    BOARD	    BCM
+### PIN Board vs GPIO Details :
 
-Relay 1	    11	      GPIO 17
+| Relays  | BOARD  | GPIO |
+|---------|--------|------|
+| Relay 1 |     11 |  17  |
+| Relay 2 |     13 |  27  |
+| Relay 3 |     15 |  22  |
+| Relay 4 |     16 |  23  |
 
-Relay 2	    15	      GPIO 22
 
-Relay 3	    13	      GPIO 27
-
-Relay 4	    16	      GPIO 23
 
 # Interface
 
