@@ -1,9 +1,23 @@
-# Module Relais 240V
-Boitier avec 3 prises 240V commandées via une interface Web en utilisant les technologies Restful API, Flask, bootstrap sur une Raspberry Pi zero.
+# RelayBox
 
-Ce projet consiste à regrouper différentes technologies pour piloter un boitier électrique grâce à une application web simple via le wifi de la maison.
+Ce projet consiste à regrouper différentes technologies pour piloter un boitier comprenant 4 relais 240 V grâce à une application web simple.
 
-# Interface
+
+## Module 4x relais 240V
+Boitier avec 4 prises 240V commandées via une interface Web en utilisant les technologies Restful API, Flask, bootstrap sur une Raspberry Pi zero.
+
+### PIN Board vs GPIO Details :
+
+| Relays  | BOARD  | GPIO |
+|---------|--------|------|
+| Relay 1 |     11 |  17  |
+| Relay 2 |     13 |  27  |
+| Relay 3 |     15 |  22  |
+| Relay 4 |     16 |  23  |
+
+
+
+## Interface Web
 
 Depuis un smartphone :
 
@@ -13,14 +27,14 @@ Depuis un PC :
 
 ![](images/RelayControlAppPC.png)
 
-# Boitier
+## Boitier
 Le boitier est construit en séparant la partie électrique 240V de la commande (Raspberry Pi zero et module relais) au maximum.
 
 ![](images/MonsterBorgV1.png)
 
 
-# Code
-Le code est reprit de https://github.com/yusufcanb/flask-relay-control et adapté avec Bootstrap.
+## Code
+Le code est simple et utilise GPIO, Flask, Bootstrap et Logging.
 
 ![](images/relaymodule.jpg)
 

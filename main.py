@@ -21,8 +21,8 @@ import os                           #imports OS library for Shutdown control
 
 stopButton = Button(26)             # defines the button as an object and chooses GPIO 26
 
-PASSWORD    = 'password'
-USERNAME    = "admin"
+PASSWORD    = ''
+USERNAME    = ''
 name = ""
 SHUTDOWN_BUTTON = 10
 
