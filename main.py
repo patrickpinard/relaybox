@@ -15,20 +15,17 @@ from gpiozero import Button
 import time                         
 import os                           
 
-stopButton = 26
-GPIO.setup(stopButton, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # external button to shutdown if pressed continously 2 sec        
-
 PASSWORD    = 'password'
 USERNAME    = 'admin'
 
-
-
 logging.basicConfig(filename='main.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
-app = Flask(__name__)
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
+stopButton = 26
+GPIO.setup(stopButton, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # external button to shutdown if pressed continously 2 sec        
+
+app = Flask(__name__)
 
 # Create a dictionary called pins to store the pin number, name, and pin state:
 pins = {
