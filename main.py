@@ -14,11 +14,17 @@
 import RPi.GPIO as GPIO
 from flask import Flask, render_template, request, redirect, jsonify, url_for, session, abort
 import logging
-import os
+import time
+from gpiozero import Button         #import button from the Pi GPIO library
+import time                         # import time functions
+import os                           #imports OS library for Shutdown control
+
+stopButton = Button(26)             # defines the button as an object and chooses GPIO 26
 
 PASSWORD    = 'password'
 USERNAME    = "admin"
 name = ""
+SHUTDOWN_BUTTON = 10
 
 logging.basicConfig(filename='main.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -118,8 +124,22 @@ def command(changePin, action):
 
     return render_template('main.html', **templateData)
 
+def shutdown(channel):
+    # shutdown proprely raspberry pi zero if external button pressed
+    
+    global stopButton
+
+    logging.info("stop button pressed... waiting for confirmation to shutdown.")
+    if stopButton.is_pressed: #Check to see if button is pressed
+        time.sleep(1) # wait for the hold time we want. 
+        if stopButton.is_pressed: #check if the user let go of the button
+            logging.info("shutdown raspberry pi confirmed by stop button pressed more than 2 sec.")
+            os.system("shutdown now -h") #shut down the Pi -h is or -r will reset
+            time.sleep(1) # wait to loop again so we don’t use the processor too much.
+        
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
     logging.info("program starting...")
+    GPIO.add_event_detect(stopButton, GPIO.RISING, callback=shutdown)  # waiting event to shutdown via external stop button 
     app.run(host='0.0.0.0', port=8000, debug=True)
