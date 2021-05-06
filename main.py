@@ -23,7 +23,7 @@ logging.basicConfig(filename='main.log', filemode='w', level=logging.INFO, forma
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 stopButton = 26
-GPIO.setup(stopButton, GPIO.FALLING, pull_up_down=GPIO.PUD_UP)  # external button to shutdown if pressed continously 2 sec        
+#GPIO.setup(stopButton, GPIO.FALLING, pull_up_down=GPIO.PUD_UP)  # external button to shutdown if pressed continously 2 sec        
 #GPIO.setup(stopButton, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # external button to shutdown if pressed continously 2 sec  
 
 app = Flask(__name__)
