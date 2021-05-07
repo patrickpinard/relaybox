@@ -22,7 +22,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 stopButton = 26
 #GPIO.setup(stopButton, GPIO.FALLING, pull_up_down=GPIO.PUD_UP)  # external button to shutdown if pressed continously 2 sec        
-#GPIO.setup(stopButton, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # external button to shutdown if pressed continously 2 sec  
+GPIO.setup(stopButton, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # external button to shutdown if pressed continously 2 sec  
 
 app = Flask(__name__)
 
@@ -120,6 +120,7 @@ def shutdown(channel):
     # shutdown proprely raspberry pi zero if external button pressed 2 sec. continously
     
     logging.info("stop button pressed... waiting for confirmation to shutdown.")
+    print("shutdown requested")
    # os.system("shutdown now -h") #shut down the Pi -h is or -r will reset
     
         
@@ -129,5 +130,6 @@ if __name__ == "__main__":
     logging.info("########   Relaybox V1.0  #########")
     logging.info("program starting...")
     logging.info("pins definition : " + str(pins))
-    #GPIO.add_event_detect(stopButton, GPIO.FALLING, callback=shutdown, bouncetime=2000)  # waiting event to shutdown via external stop button pressed 2 sec.
+    GPIO.add_event_detect(stopButton, GPIO.FALLING, callback=shutdown, bouncetime=2000)  # waiting event to shutdown via external stop button pressed 2 sec.
+    logging.info("GPIO event configured"))
     app.run(host='0.0.0.0', port=8000, debug=True)
