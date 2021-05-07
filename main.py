@@ -122,7 +122,7 @@ def shutdown(channel):
     logging.info("stop button pressed... waiting for confirmation to shutdown.")
     print("shutdown now -h")
     os.system("shutdown now -h") #shut down the Pi -h is or -r will reset
-    
+    print("shutdown now -h command passed")
         
 
 if __name__ == "__main__":
