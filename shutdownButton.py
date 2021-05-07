@@ -14,5 +14,9 @@ while True:
         if stopButton.is_pressed: #check if the user let go of the button
             print("shutdown confirmed,  bye !")
             print("shutdown now -h")
+            logging.info("shutdown confirmed,  bye !")
             os.system("shutdown now -h") #shut down the Pi -h is or -r will reset
+        else:
+            print("shutdown NOT confirmed !")
+            logging.info("shutdown NOT confirmed !")
     time.sleep(1) # wait to loop again so we don’t use the processor too much.
