@@ -4,7 +4,7 @@ import os
 import logging
 
 stopButton = Button(26) # defines the button as an object and chooses GPIO 26
-logging.basicConfig(filename='shutdownButton.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='shutdownbutton.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 while True: 
     if stopButton.is_pressed: #Check to see if button is pressed
