@@ -16,7 +16,7 @@ import os
 PASSWORD    = 'password'
 USERNAME    = 'admin'
 
-#logging.basicConfig(filename='relaybox.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='relaybox.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -43,10 +43,10 @@ def login():
         # Check if user already logged in
         
         if not session.get("logged_in"):
-            #logging.info("login not done, redirect to 'login' page")
+            logging.info("login not done, redirect to 'login' page")
             return render_template('login.html', error_message=" welcome ! ")
         else:
-            #logging.info("login already done, redirect to 'main' page")
+            logging.info("login already done, redirect to 'main' page")
             return render_template('main.html')
 
     if request.method == "POST":
@@ -56,7 +56,7 @@ def login():
         pwd = request.form.get("password")
 
         if pwd == PASSWORD and name == USERNAME:
-                #logging.info("user: " + name + " logged in")
+                logging.info("user: " + name + " logged in")
                 session['logged_in'] = True
                 # For each pin, read the pin state and store it in the pins dictionary:
                 for pin in pins:
@@ -68,14 +68,14 @@ def login():
                 # Pass the template data into the template main.html and return it to the user
                 return render_template('main.html', **templateData)
         else:
-                #logging.warning("login with wrong username and password")
+                logging.warning("login with wrong username and password")
                 return render_template('login.html', error_message="wrong username and password. Please try again")
 
 @app.route("/logout", methods=["GET",'POST'])
 def logout():
     
     session["logged_in"] = False
-    #logging.info("user logout")
+    logging.info("user logout")
     return render_template('login.html')           
 
 @app.route("/command/<changePin>/<action>")
@@ -119,8 +119,8 @@ def command(changePin, action):
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
 
-    #logging.info("########   Relaybox V1.0  #########")
-    #logging.info("program starting...")
-    #logging.info("pins definition : " + str(pins))
+    logging.info("########   Relaybox V1.0  #########")
+    logging.info("program starting...")
+    logging.info("pins definition : " + str(pins))
     
     app.run(host='0.0.0.0', port=8000, debug=True)
