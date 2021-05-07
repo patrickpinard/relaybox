@@ -1,3 +1,12 @@
+
+#!/usr/bin/env python
+# coding: utf-8
+# Auteur    : Patrick Pinard
+# Date      : 6.5.2021
+# Objet     : Pilotage modules relais avec interface web basée sur API RESTful Flask et bootstrap sur PI zero 
+# Version   :   1.0 
+
+
 from gpiozero import Button 
 import time 
 import os 
