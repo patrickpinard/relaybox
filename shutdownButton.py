@@ -5,7 +5,14 @@ import logging
 
 stopButton = Button(26) # defines the button as an object and chooses GPIO 26
 
+username=os.system("whoami")
+if username is not "root":
+    print("You aren't root")
+else:
+    print("Hello, "+username)
+
 while True: 
+    
     if stopButton.is_pressed: #Check to see if button is pressed
         
         print("shutdown button pressed, waiting for confirmation (3 sec)")
