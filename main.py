@@ -120,8 +120,8 @@ def shutdown(channel):
     # shutdown proprely raspberry pi zero if external button pressed 2 sec. continously
     
     logging.info("stop button pressed... waiting for confirmation to shutdown.")
-    print("shutdown requested")
-   # os.system("shutdown now -h") #shut down the Pi -h is or -r will reset
+    print("shutdown now -h")
+    os.system("shutdown now -h") #shut down the Pi -h is or -r will reset
     
         
 
