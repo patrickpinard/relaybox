@@ -126,6 +126,7 @@ def shutdown(channel):
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
+    logging.info("########   Relaybox V1.0  #########")
     logging.info("program starting...")
     logging.info("pins definition : " + str(pins))
     #GPIO.add_event_detect(stopButton, GPIO.FALLING, callback=shutdown, bouncetime=2000)  # waiting event to shutdown via external stop button pressed 2 sec.
