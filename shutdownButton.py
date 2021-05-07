@@ -8,7 +8,11 @@ logging.basicConfig(filename='shutdownButton.log', filemode='w', level=logging.I
 
 while True: 
     if stopButton.is_pressed: #Check to see if button is pressed
+        logging.info("stop button pressed... waiting for confirmation to shutdown.")
+        print("shutdown button pressed, waiting for confirmation (3 sec)")
         time.sleep(3) # wait for the hold time we want. 
         if stopButton.is_pressed: #check if the user let go of the button
+            print("shutdown confirmed,  bye !")
+            print("shutdown now -h")
             os.system("shutdown now -h") #shut down the Pi -h is or -r will reset
     time.sleep(1) # wait to loop again so we don’t use the processor too much.
