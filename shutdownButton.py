@@ -1,7 +1,7 @@
 from gpiozero import Button 
 import time 
 import os 
-import logging
+
 
 stopButton = Button(26) # defines the button as an object and chooses GPIO 26
 
