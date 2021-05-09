@@ -84,14 +84,14 @@ def log_request(request):
 
     #logging.info(request.__dict__)
     headers = request.headers
-    
+
     #logging.info(headers)
     
     host = request.host
-    logging.info("host : " + host)
+    logging.info("   host : " + host)
 
-    host_url = request.host_url
-    logging.info("host url : " + host_url)
+    #host_url = request.host_url
+    #logging.info("   host url : " + host_url)
 
     #path = request.path
     #logging.info("path : " + path)
@@ -100,7 +100,7 @@ def log_request(request):
     #logging.info("full_path: " + f_path)
 
     url = request.url
-    logging.info("url: " + url)
+    logging.info("   url: " + url)
 
     #base_url = request.base_url
     #logging.info("base_url: " + base_url)
@@ -109,7 +109,7 @@ def log_request(request):
     #logging.info("url_root: " + url_root)
 
     user_agent = request.user_agent
-    logging.info("user_agent : " + str(user_agent))
+    logging.info("   user_agent : " + str(user_agent))
 
 @app.route("/command/<changePin>/<action>")
 def command(changePin, action):
