@@ -12,7 +12,7 @@ from flask import Flask, render_template, request, redirect, jsonify, url_for, s
 import logging
 import time                         
 import os                           
-import jsons
+
 
 PASSWORD    = 'password'
 USERNAME    = 'admin'
@@ -82,10 +82,9 @@ def logout():
 @app.route("/command/<changePin>/<action>")
 def command(changePin, action):
     message =""
-    
-    a_dict = jsons.dump(request.__dict__)
+
     logging.info("received a request : ")
-    logging.info(a_dict)
+    logging.info(request.__dict__)
 
 
     # Convert the pin from the URL into an integer:
