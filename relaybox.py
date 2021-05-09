@@ -73,7 +73,7 @@ def login():
                 return render_template('main.html', **templateData)
         else:
                 logging.warning("login with wrong username and password")
-                logging.info("user: " + name + " password : " + password + "try to login")
+                logging.info("user: " + str(name) + " password : " + str(pwd) + "try to login")
                 return render_template('login.html', error_message="wrong username and password. Please try again")
 
 @app.route("/logout", methods=["GET",'POST'])
