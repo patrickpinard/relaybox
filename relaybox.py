@@ -81,7 +81,17 @@ def logout():
 @app.route("/command/<changePin>/<action>")
 def command(changePin, action):
     message =""
-    print(request.__dict__)
+    
+    logging.info("received a request : ")
+    logging.info(request.__dict__)
+    logging.info(request.headers)
+    logging.info(request.data)
+    logging.info(request.args)
+    logging.info(request.form)
+    logging.info(request.endpoint)
+    logging.info(request.method)
+    logging.info(request.remote_addr)
+
     # Convert the pin from the URL into an integer:
     changePin = int(changePin)
     # Get the device name for the pin being changed:
