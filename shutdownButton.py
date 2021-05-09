@@ -22,17 +22,25 @@ while True:
         print("shutdown button pressed, waiting for confirmation (3 sec)")
         time.sleep(1) # wait for the hold time we want. 
         print("3... continue to press shutdown button to confirm !")
-        time.sleep(1) # wait for the hold time we want. 
-        print(".2.. continue to press shutdown button to confirm !")
-        time.sleep(1) # wait for the hold time we want. 
-        print("..1. continue to press shutdown button to confirm !")
-        time.sleep(1) # wait for the hold time we want. 
-        if stopButton.is_pressed: #check if the user let go of the button
-            print("...0 shutdown confirmed,  bye !")
-            print("shutdown now -h")
-            logging.info("shutdown now -h initialized")
-            os.system("sudo shutdown now -h") #shut down the Pi -h is or -r will reset
+        if stopButton.is_pressed: 
+            time.sleep(1) # wait for the hold time we want. 
+            print(".2.. continue to press shutdown button to confirm !")
+            if stopButton.is_pressed: 
+                time.sleep(1) # wait for the hold time we want. 
+                print("..1. continue to press shutdown button to confirm !")
+                time.sleep(1) # wait for the hold time we want. 
+                if stopButton.is_pressed: #check if the user let go of the button
+                    print("...0 shutdown confirmed,  bye !")
+                    print("shutdown now -h")
+                    logging.info("shutdown now -h initialized")
+                    os.system("sudo shutdown now -h") #shut down the Pi -h is or -r will reset
+                else:
+                    print("shutdown aborted !")
+                    logging.info("shutdown aborted")
+            else:
+                print("shutdown aborted !")
+                logging.info("shutdown aborted")
         else:
-            print("shutdown NOT confirmed !")
-            logging.info("shutdown not confirmed by pressing button more than 3 sec.")
+            print("shutdown aborted !")
+            logging.info("shutdown aborted")
     time.sleep(1) # wait to loop again so we don’t use the processor too much.
