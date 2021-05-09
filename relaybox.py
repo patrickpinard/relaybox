@@ -45,6 +45,9 @@ def login():
         
         if not session.get("logged_in"):
             logging.info("login not done, redirect to 'login' page")
+            name = request.form.get("username")
+            pwd = request.form.get("password")
+            logging.info("user: " + name + " password : " + password + "try to login")
             return render_template('login.html', error_message=" welcome ! ")
         else:
             logging.info("login already done, redirect to 'main' page")
@@ -70,6 +73,7 @@ def login():
                 return render_template('main.html', **templateData)
         else:
                 logging.warning("login with wrong username and password")
+                logging.info("user: " + name + " password : " + password + "try to login")
                 return render_template('login.html', error_message="wrong username and password. Please try again")
 
 @app.route("/logout", methods=["GET",'POST'])
