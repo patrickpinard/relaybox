@@ -108,7 +108,7 @@ def log_request(request):
     logging.info("url_root: " + url_root)
 
     user_agent = request.user_agent
-    logging.info("user_agent : " + user_agent)
+    logging.info("user_agent : " + str(user_agent))
 
 @app.route("/command/<changePin>/<action>")
 def command(changePin, action):
