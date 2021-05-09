@@ -73,56 +73,30 @@ def login():
                 return render_template('main.html', **templateData)
         else:
                 logging.warning("login with wrong username and password")
-                logging.info("user: " + str(name) + " password : " + str(pwd) + "try to login")
+                logging.info("user: " + str(name) + " with password : " + str(pwd) + " try to login without success")
                 return render_template('login.html', error_message="wrong username and password. Please try again")
 
 @app.route("/logout", methods=["GET",'POST'])
 def logout():
-    
     session["logged_in"] = False
     logging.info("user logout")
     return render_template('login.html')           
 
 
 def log_request(request):
-
-    #logging.info(request.__dict__)
     headers = request.headers
-
-    #logging.info(headers)
-    
     host = request.host
     logging.info("   host : " + host)
-
-    #host_url = request.host_url
-    #logging.info("   host url : " + host_url)
-
-    #path = request.path
-    #logging.info("path : " + path)
-
-    #f_path = request.full_path
-    #logging.info("full_path: " + f_path)
-
     url = request.url
     logging.info("   url: " + url)
-
-    #base_url = request.base_url
-    #logging.info("base_url: " + base_url)
-
-    #url_root = request.url_root
-    #logging.info("url_root: " + url_root)
-
     user_agent = request.user_agent
     logging.info("   user_agent : " + str(user_agent))
 
 @app.route("/command/<changePin>/<action>")
 def command(changePin, action):
     message =""
-
     logging.info("received a request : ")
     log_request(request)
-    
-
     # Convert the pin from the URL into an integer:
     changePin = int(changePin)
     # Get the device name for the pin being changed:
@@ -161,8 +135,12 @@ def command(changePin, action):
 if __name__ == "__main__":
     app.secret_key = os.urandom(12)
 
+    logging.info("###################################")
     logging.info("########   Relaybox V1.0  #########")
+    logging.info("########   Patrick Pinard #########")
+    logging.info("###################################")
     logging.info("program starting...")
+    logging.info("")
     logging.info("pins definition : " + str(pins))
     
     app.run(host='0.0.0.0', port=8000, debug=False)
