@@ -20,11 +20,17 @@ while True:
     if stopButton.is_pressed: #Check to see if button is pressed
         logging.info("shutdown requested, waiting for confirmation")
         print("shutdown button pressed, waiting for confirmation (3 sec)")
-        time.sleep(3) # wait for the hold time we want. 
+        time.sleep(1) # wait for the hold time we want. 
+        print("3... continue to press shutdown button to confirm !")
+        time.sleep(1) # wait for the hold time we want. 
+        print(".2.. continue to press shutdown button to confirm !")
+        time.sleep(1) # wait for the hold time we want. 
+        print("..1. continue to press shutdown button to confirm !")
+        time.sleep(1) # wait for the hold time we want. 
         if stopButton.is_pressed: #check if the user let go of the button
-            print("shutdown confirmed,  bye !")
+            print("...0 shutdown confirmed,  bye !")
             print("shutdown now -h")
-            logging.info("shutdown now")
+            logging.info("shutdown now -h initialized")
             os.system("sudo shutdown now -h") #shut down the Pi -h is or -r will reset
         else:
             print("shutdown NOT confirmed !")
