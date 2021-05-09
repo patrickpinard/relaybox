@@ -79,13 +79,44 @@ def logout():
     logging.info("user logout")
     return render_template('login.html')           
 
+
+def log_request(request):
+
+    #logging.info(request.__dict__)
+    headers = request.headers
+    logging.info(headers)
+    
+    host = request.host
+    logging.info("host : " + host)
+
+    host_url = request.host_url
+    logging.info("host url : " + host_url)
+
+    path = request.path
+    logging.info("path : " + path)
+
+    f_path = request.full_path
+    logging.info("full_path: " + f_path)
+
+    url = request.url
+    logging.info("url: " + url)
+
+    base_url = request.base_url
+    logging.info("base_url: " + base_url)
+
+    url_root = request.url_root
+    logging.info("url_root: " + url_root)
+
+    user_agent = request.user_agent
+    logging.info("user_agent : " + user_agent)
+
 @app.route("/command/<changePin>/<action>")
 def command(changePin, action):
     message =""
 
     logging.info("received a request : ")
-    logging.info(request.__dict__)
-
+    log_request(request)
+    
 
     # Convert the pin from the URL into an integer:
     changePin = int(changePin)
