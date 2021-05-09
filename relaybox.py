@@ -47,7 +47,7 @@ def login():
             logging.info("login not done, redirect to 'login' page")
             name = request.form.get("username")
             pwd = request.form.get("password")
-            logging.info("user: " + name + " password : " + pwd + "try to login")
+            logging.info("user: " + str(name) + " password : " + str(pwd) + "try to login")
             return render_template('login.html', error_message=" welcome ! ")
         else:
             logging.info("login already done, redirect to 'main' page")
