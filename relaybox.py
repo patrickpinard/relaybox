@@ -17,7 +17,7 @@ import os
 PASSWORD    = 'password'
 USERNAME    = 'admin'
 
-logging.basicConfig(filename='/home/pi/python/relaybox/relaybox.log', filemode='a', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='/home/pi/python/relaybox/relaybox.log', filemode='wa', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
