@@ -16,7 +16,7 @@ import os
 PASSWORD    = 'password'
 USERNAME    = 'admin'
 
-logging.basicConfig(filename='/home/pi/python/relaybox/relaybox.log', filemode='w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename='/home/pi/python/relaybox/relaybox.log', filemode='aw', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -82,8 +82,6 @@ def logout():
 def command(changePin, action):
     r= request()
     print("Request received :" , r)
-    logging.info("Request received :")
-    logging.info(r)
     message =""
     # Convert the pin from the URL into an integer:
     changePin = int(changePin)
