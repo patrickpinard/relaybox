@@ -80,6 +80,8 @@ def logout():
 
 @app.route("/command/<changePin>/<action>")
 def command(changePin, action):
+    r = request()
+    print("request = ",r)
     message =""
     # Convert the pin from the URL into an integer:
     changePin = int(changePin)
