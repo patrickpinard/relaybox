@@ -1,10 +1,10 @@
-# RelayBox
+# MyBox
 
-Ce projet consiste à regrouper différentes technologies pour piloter un boitier comprenant 4 relais 240 V grâce à une application web simple.
+Ce projet consiste à regrouper différentes technologies pour piloter un boitier comprenant 4 relais 240V, 2 sondes de températures DS18B20 grâce à une application web simple en utilisant Flask, Bootstrap et un peu d'Ajax et Javascript sur un Raspberry Pi zero.
 
 
 ## Module 4x relais 240V
-Boitier avec 4 prises 240V commandées via une interface Web en utilisant les technologies Restful API, Flask, bootstrap sur une Raspberry Pi zero.
+Boitier avec 4 prises 240V connectés via GPIO sur Raspberry pi zero.
 
 ### PIN Board vs GPIO Details :
 
@@ -21,7 +21,10 @@ Boitier avec 4 prises 240V commandées via une interface Web en utilisant les te
 
 Depuis un smartphone :
 
-![](images/RelayControlApp.png)
+![](images/MyBoxV4.0-0.png)
+![](images/MyBoxV4.0-1.png)
+![](images/MyBoxV4.0-2.png)
+![](images/MyBoxV4.0-3.png)
 
 Depuis un PC :
 
